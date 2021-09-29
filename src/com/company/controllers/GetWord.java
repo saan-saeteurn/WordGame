@@ -25,14 +25,9 @@ public class GetWord {
 
         try {
             Path thePath = Paths.get("src/" + "wordlist.txt");
-
-            //FileReader fileReader = new FileReader(String.valueOf(thePath));
-            //BufferedReader in = new BufferedReader(fileReader);
-
             in = new BufferedReader(new FileReader(String.valueOf(thePath)));
 
             List<String> lines = new ArrayList<>();
-
             String line = null;
 
             try{
@@ -44,9 +39,7 @@ public class GetWord {
                 }
 
                 in.close();
-
                 words = lines.toArray(new String[lines.size()]);
-
                 theWord = getRandomWord(words);
 
             } catch(IOException e) {
@@ -67,6 +60,6 @@ public class GetWord {
 
     private String getRandomWord(String[] words){
         int rand = new Random().nextInt(words.length);
-        return words[rand];
+        return words[0];
     }
 }

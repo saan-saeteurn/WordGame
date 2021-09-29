@@ -17,21 +17,20 @@ public class Main {
     public static void main(String[] args) {
 
         guessCounter = 0;
-
         GetWord getWord = new GetWord();
         String theWord = getWord.getTheWord();
-
         WordList word = new WordList(theWord);
-
         letters = calculateLetters(word.getTheWord());
-
         view = new CmdLineView(letters);
         view.startGame();
         view.cheat(word.getTheWord());
 
         while(guessCounter <= maxGuesses){
             hints = guess();
-            view.displayHints(hints);
+            view.displayHints(hints, guessCounter, maxGuesses);
+
+            if(view.isWinner(hints, letters))
+                break;
         }
     }
 

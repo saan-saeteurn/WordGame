@@ -60,6 +60,6 @@ public class GetWord {
 
     private String getRandomWord(String[] words){
         int rand = new Random().nextInt(words.length);
-        return words[0];
+        return words[rand];
     }
 }

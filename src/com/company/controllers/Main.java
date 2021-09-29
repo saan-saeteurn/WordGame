@@ -54,11 +54,9 @@ public class Main {
         theGuess = view.makeAGuess();
         Boolean isFound = false;
 
-        for(int i = 0; i < letters.length; i++) {
-            if(letters[i].equals(theGuess)) {
-                if(Arrays.stream(hints).toList().contains(theGuess))
-                    continue;
-                else {
+        if(Arrays.stream(letters).toList().contains(theGuess)) {
+            for(int i = 0; i < letters.length; i++) {
+                if(letters[i].equals(theGuess)) {
                     hints[i] = theGuess;
                     isFound = true;
                 }

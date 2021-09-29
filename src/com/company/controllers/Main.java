@@ -8,7 +8,7 @@ public class Main {
 
     public static String[] letters;
     public static int numLetters = 0;
-    public static int numGuesses;
+    public static int guessCounter;
     public static int maxGuesses;
     public static String theGuess;
     public static String[] hints;
@@ -16,7 +16,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        numGuesses = 6;
+        guessCounter = 0;
 
         GetWord getWord = new GetWord();
         String theWord = getWord.getTheWord();
@@ -29,13 +29,9 @@ public class Main {
         view.startGame();
         view.cheat(word.getTheWord());
 
-        while(numGuesses > 0){
+        while(guessCounter <= maxGuesses){
             hints = guess();
             view.displayHints(hints);
-            //display
-            String currentGuess = view.getTheGuess();
-            if(currentGuess != null)
-                System.out.println("You guessed " + currentGuess);
         }
     }
 
@@ -57,15 +53,22 @@ public class Main {
 
     private static String[] guess(){
         theGuess = view.makeAGuess();
+        Boolean isFound = false;
 
         for(int i = 0; i < letters.length; i++) {
             if(letters[i].equals(theGuess)) {
                 if(Arrays.stream(hints).toList().contains(theGuess))
                     continue;
-                else
+                else {
                     hints[i] = theGuess;
+                    isFound = true;
+                }
             }
         }
+
+        if(!isFound)
+            guessCounter += 1;
+
         return hints;
     }
 }

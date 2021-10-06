@@ -11,6 +11,7 @@ public class Main {
     public static int guessCounter;
     public static int maxGuesses;
     public static String theGuess;
+    public static Boolean foundLetter;
     public static String[] hints;
     public static  CmdLineView view;
 
@@ -25,9 +26,9 @@ public class Main {
         view.startGame();
         view.cheat(word.getTheWord());
 
-        while(guessCounter <= maxGuesses){
+        while(guessCounter < maxGuesses){
             hints = guess();
-            view.displayHints(hints, guessCounter, maxGuesses);
+            view.displayHints(hints, guessCounter, maxGuesses, foundLetter);
 
             if(view.isWinner(hints, letters))
                 break;
@@ -52,18 +53,19 @@ public class Main {
 
     private static String[] guess(){
         theGuess = view.makeAGuess();
-        Boolean isFound = false;
+        view.setTheGuess(theGuess);
+        foundLetter = false;
 
         if(Arrays.stream(letters).toList().contains(theGuess)) {
             for(int i = 0; i < letters.length; i++) {
                 if(letters[i].equals(theGuess)) {
                     hints[i] = theGuess;
-                    isFound = true;
+                    foundLetter = true;
                 }
             }
         }
 
-        if(!isFound)
+        if(!foundLetter)
             guessCounter += 1;
 
         return hints;

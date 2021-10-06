@@ -26,14 +26,17 @@ public class CmdLineView {
         return input.next();
     }
 
-    public void displayHints(String[] hints, int guessCounter, int maxGuessCount){
-        for(String hint: hints){
-            System.out.print(hint);
+    public void displayHints(String[] hints, int guessCounter, int maxGuessCount, Boolean foundLetter){
+        if (!foundLetter) {
+            System.out.println("Sorry, letter '" + theGuess + "' is NOT in the word.");
+        }
+        else {
+            for (String hint : hints) {
+                System.out.print(hint);
+            }
         }
 
         System.out.print("\n");
-        if(guessCounter <= maxGuessCount)
-            System.out.println("Number of incorrect guesses: " + guessCounter + " (out of " + maxGuessCount + ")");
     }
 
     public void cheat(String theWord){
